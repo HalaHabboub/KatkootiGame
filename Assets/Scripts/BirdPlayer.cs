@@ -21,11 +21,9 @@ public class BirdPlayer : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
         anim = katkooti.GetComponent<Animator>();
         particleSystem = this.GetComponent<ParticleSystem>();
         particleSystem.Pause();
-
     }
 
     // Update is called once per frame
@@ -77,16 +75,14 @@ public class BirdPlayer : MonoBehaviour
 
     void CheckIfCanMove()
     {
-        canMoveForward = !Physics.Raycast(transform.position, Vector3.forward, out RaycastHit hit1, colliderDistCheck) && (hit1.collider == null || (hit1.collider != null && hit1.collider.tag != "collider"));
-        canMoveBackward = !Physics.Raycast(transform.position, Vector3.back, out RaycastHit hit2, colliderDistCheck) && (hit2.collider == null || (hit2.collider != null && hit2.collider.tag != "collider"));
-        canMoveLeft = !Physics.Raycast(transform.position, Vector3.left, out RaycastHit hit3, colliderDistCheck) && (hit3.collider == null || (hit3.collider != null && hit3.collider.tag != "collider"));
-        canMoveRight = !Physics.Raycast(transform.position, Vector3.right, out RaycastHit hit4, colliderDistCheck) && (hit4.collider == null || (hit4.collider != null && hit4.collider.tag != "collider"));
+        canMoveForward = !Physics.Raycast(transform.position, Vector3.forward, out RaycastHit hit1, colliderDistCheck) || (hit1.collider != null && hit1.collider.tag != "collider");
+        canMoveBackward = !Physics.Raycast(transform.position, Vector3.back, out RaycastHit hit2, colliderDistCheck) || (hit2.collider != null && hit2.collider.tag != "collider");
+        canMoveLeft = !Physics.Raycast(transform.position, Vector3.left, out RaycastHit hit3, colliderDistCheck) || (hit3.collider != null && hit3.collider.tag != "collider");
+        canMoveRight = !Physics.Raycast(transform.position, Vector3.right, out RaycastHit hit4, colliderDistCheck) || (hit4.collider != null && hit4.collider.tag != "collider");
 
         Debug.DrawRay(transform.position, Vector3.forward * colliderDistCheck, Color.red, 0.1f);
         Debug.DrawRay(transform.position, Vector3.back * colliderDistCheck, Color.red, 0.1f);
         Debug.DrawRay(transform.position, Vector3.left * colliderDistCheck, Color.red, 0.1f);
         Debug.DrawRay(transform.position, Vector3.right * colliderDistCheck, Color.red, 0.1f);
     }
-
-
 }
