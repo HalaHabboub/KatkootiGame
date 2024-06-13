@@ -85,4 +85,14 @@ public class BirdPlayer : MonoBehaviour
         Debug.DrawRay(transform.position, Vector3.left * colliderDistCheck, Color.red, 0.1f);
         Debug.DrawRay(transform.position, Vector3.right * colliderDistCheck, Color.red, 0.1f);
     }
+
+    public void OnTriggerEnter(Collider collider)
+    {
+        if (collider.CompareTag("river"))
+        {
+            Die();
+        }
+    }
+
+
 }

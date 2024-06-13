@@ -1,11 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using TMPro;
+using UnityEditor.UIElements;
 using UnityEngine;
 
 public class SpawnController : MonoBehaviour
 {
     public bool goLeft = false;
     public bool goRight = false;
+
 
     public List<GameObject> items = new List<GameObject>();
     public List<Spawner> spawnersLeft = new List<Spawner>();
@@ -23,7 +26,7 @@ public class SpawnController : MonoBehaviour
 
         if (direction > 0) { goLeft = false; goRight = true; } else { goLeft = true; goRight = false; }
 
-        for(int i = 0; i< spawnersLeft.Count; i++)
+        for (int i = 0; i < spawnersLeft.Count; i++)
         {
             if (i % 2 != 0)
             {
@@ -61,6 +64,7 @@ public class SpawnController : MonoBehaviour
 
     void Update()
     {
-        
+
     }
+
 }
