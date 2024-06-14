@@ -13,8 +13,8 @@ public class Manager : MonoBehaviour
     public Camera cam = null;
     public GameObject guiGameOver = null;
     private bool levelOne = false;
-
-    //public LevelGenerator levelGenerator = null;
+    private bool levelTwo = false;
+    private bool levelThree = false;
 
     public GroundsSpawner groundsSpawner = null;
 
@@ -38,11 +38,7 @@ public class Manager : MonoBehaviour
 
     private void Start()
     {
-        // for (int i = 0; i < levelCount; i++)
-        // {
-        //     levelGenerator.RandomGenerator();
-        //     count++;
-        // }
+
     }
 
     void Update()
@@ -59,24 +55,26 @@ public class Manager : MonoBehaviour
 
     public void UpdateDistanceCount()
     {
-        if (currentDistance == 1 && !levelOne)
+        if ((currentDistance == 1 && !levelOne))
         {
             levelOne = true;
+            groundsSpawner.challengeGenerator();
+
+        }
+        if ((currentDistance == 10 && !levelTwo))
+        {
+            levelTwo = true;
+            groundsSpawner.challengeGenerator();
+        }
+        if ((currentDistance == 20 && !levelThree))
+        {
+            levelThree = true;
             groundsSpawner.challengeGenerator();
         }
         Debug.Log("Player moved forward for one point");
         currentDistance += 1;
         distance.text = currentDistance.ToString();
 
-        // if (currentDistance == 10)
-        // {
-        //     levelGenerator.challengeGenerator();
-        // }
-        // else
-        // {
-        //     levelGenerator.RandomGenerator();
-        //     count++;
-        // }
         groundsSpawner.randomGenerator();
 
     }

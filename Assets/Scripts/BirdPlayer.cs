@@ -21,15 +21,24 @@ public class BirdPlayer : MonoBehaviour
     private Rigidbody rb;
 
     private bool canFly = false;
-
+    public int level = 1;
+    //For GUI messages
     public GameObject guiChallengeOne = null;
-    int level = 1;
+    public GameObject guiChallengeTwo = null;
+    public GameObject guiChallengeThree = null;
 
-    //For voice
-    public float sensitivity = 100f;
+    //For voice input
+    public float sensitivity = 1000f;
     public float loudness;
 
     AudioSource _audio;
+
+    //for challenge three (listening instructions)
+    private Coroutine voiceInstructionCoroutine;
+    private KeyCode currentKeyCode = KeyCode.None;
+    [SerializeField] List<AudioClip> instruction = new List<AudioClip>();
+    [SerializeField] AudioSource instructionAudio;
+
 
 
     // Start is called before the first frame update
@@ -56,6 +65,8 @@ public class BirdPlayer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+
         if (!Manager.instance.CanPlay()) return;
 
         if (dead) return;
@@ -70,8 +81,14 @@ public class BirdPlayer : MonoBehaviour
         {
             Die();
         }
-
-
+        if (Manager.instance.currentDistance > 40 && Manager.instance.currentDistance < 55)
+        {
+            level = 2;
+        }
+        if (Manager.instance.currentDistance > 55)
+        {
+            level = 4;
+        }
 
     }
 
@@ -132,13 +149,23 @@ public class BirdPlayer : MonoBehaviour
         if (collider.CompareTag("river"))
         {
             changeFly();
-            level++; //you pass a level with each river you cross
         }
-        if (collider.CompareTag("safeGrass"))
+        if (collider.CompareTag("safeGrass") && level == 1)
         {
             guiChallengeOne.SetActive(true);
             _audio.mute = false;
         }
+        if (collider.CompareTag("safeGrass") && level == 2)
+        {
+            guiChallengeTwo.SetActive(true);
+        }
+        if (collider.CompareTag("safeGrass") && level == 3)
+        {
+            guiChallengeThree.SetActive(true);
+            voiceInstructionCoroutine = StartCoroutine(VoiceInstructionChallenge());
+        }
+
+
 
     }
     public void OnTriggerExit(Collider collider)
@@ -147,12 +174,27 @@ public class BirdPlayer : MonoBehaviour
         {
             canFly = false;
             _audio.mute = true;
-        }
-        if (collider.CompareTag("safeGrass"))
-        {
-            guiChallengeOne.SetActive(false);
+            if (voiceInstructionCoroutine != null)
+            {
+                StopCoroutine(voiceInstructionCoroutine);
+                voiceInstructionCoroutine = null;
+                instructionAudio.enabled = false;
+            }
 
         }
+        if (collider.CompareTag("safeGrass") && level == 1)
+        {
+            guiChallengeOne.SetActive(false);
+        }
+        if (collider.CompareTag("safeGrass") && level == 2)
+        {
+            guiChallengeTwo.SetActive(false);
+        }
+        if (collider.CompareTag("safeGrass") && level == 3)
+        {
+            guiChallengeThree.SetActive(false);
+        }
+
 
     }
 
@@ -162,26 +204,42 @@ public class BirdPlayer : MonoBehaviour
     }
     public void fly()
     {
-        // if (level == 2)
-        // {
-        //     transform.Translate(Vector3.forward * 0.05f);
-        //     if (Input.GetButtonDown("Jump"))
-        //     {
-        //         rb.AddForce(Vector3.up * 1.5f, ForceMode.Impulse);
-        //     }
+        canMoveForward = false;
 
-        // }
-        // if (level == 1)
-        // {
-        transform.Translate(Vector3.forward * 0.02f);
-
-        loudness = GetAverageVolume() * sensitivity;
-
-        if (loudness > 4)
+        if (level == 1)
         {
-            rb.AddForce(Vector3.up * 0.3f, ForceMode.Impulse);
+            transform.Translate(Vector3.forward * 0.05f);
+
+            loudness = GetAverageVolume() * sensitivity;
+
+            if (loudness > 2)
+            {
+                rb.AddForce(Vector3.up * 1.5f, ForceMode.Impulse);
+            }
         }
-        // }
+        else if (level == 2)
+        {
+            transform.Translate(Vector3.forward * 0.05f);
+            if (Input.GetButtonDown("Jump"))
+            {
+                rb.AddForce(Vector3.up * 1.5f, ForceMode.Impulse);
+            }
+
+        }
+        else if (level == 3)
+        {
+
+            transform.Translate(Vector3.forward * 0.03f);
+            if (Input.GetKeyDown(currentKeyCode))
+            {
+                rb.AddForce(Vector3.up * 2f, ForceMode.Impulse);
+            }
+            else
+            {
+                rb.AddForce(Vector3.up * 0.3f, ForceMode.Impulse);
+
+            }
+        }
 
     }
     float GetAverageVolume()
@@ -198,6 +256,48 @@ public class BirdPlayer : MonoBehaviour
 
         return (a / 256f);
     }
+    private IEnumerator VoiceInstructionChallenge()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(4); // Wait for 3 seconds before giving a new instruction
 
+            int randomInstruction = UnityEngine.Random.Range(0, instruction.Count);
+            switch (randomInstruction)
+            {
+                case 0:
+
+                    instructionAudio.clip = instruction[0];
+                    instructionAudio.loop = true;
+                    instructionAudio.Play();
+                    currentKeyCode = KeyCode.A;
+                    Debug.Log("Press A");
+                    break;
+                case 1:
+                    instructionAudio.clip = instruction[1];
+                    instructionAudio.loop = true;
+                    instructionAudio.Play();
+                    currentKeyCode = KeyCode.I;
+                    Debug.Log("Press I");
+                    break;
+                case 2:
+                    instructionAudio.clip = instruction[2];
+                    instructionAudio.loop = true;
+                    instructionAudio.Play();
+                    currentKeyCode = KeyCode.K;
+                    Debug.Log("Press K");
+                    break;
+                case 3:
+                    instructionAudio.clip = instruction[3];
+                    instructionAudio.loop = true;
+                    instructionAudio.Play();
+                    currentKeyCode = KeyCode.O;
+                    Debug.Log("Press O");
+                    break;
+            }
+
+            //yield return new WaitForSeconds(5); // Give the player 5 seconds to respond
+        }
+    }
 
 }
