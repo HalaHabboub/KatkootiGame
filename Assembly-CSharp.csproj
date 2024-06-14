@@ -64,59 +64,23 @@
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\2022.3.21f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.Properties.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\LeanTween\Examples\Scripts\LogoCinematic.cs" />
-    <Compile Include="Assets\Crossy Road\Scripts\PlayerController.cs" />
-    <Compile Include="Assets\LeanTween\Examples\Scripts\GeneralAdvancedTechniques.cs" />
     <Compile Include="Assets\Crossy Road\Scripts\Manager.cs" />
-    <Compile Include="Assets\LeanTween\Examples\Scripts\GeneralCameraShake.cs" />
-    <Compile Include="Assets\LeanTween\Examples\Scripts\TestingUnitTests.cs" />
-    <Compile Include="Assets\LeanTween\Framework\LTDescr.cs" />
+    <Compile Include="Assets\Scripts\SpawnManager.cs" />
     <Compile Include="Assets\Crossy Road\Scripts\Spawner.cs" />
-    <Compile Include="Assets\Crossy Road\Scripts\Mover.cs" />
-    <Compile Include="Assets\LeanTween\Framework\LeanTest.cs" />
+    <Compile Include="Assets\Scripts\Barrier.cs" />
     <Compile Include="Assets\Crossy Road\Scripts\FontFix.cs" />
-    <Compile Include="Assets\LeanTween\Examples\Scripts\TestingZLegacyExt.cs" />
-    <Compile Include="Assets\LeanTween\Examples\Scripts\GeneralSequencer.cs" />
+    <Compile Include="Assets\Scripts\Mover.cs" />
+    <Compile Include="Assets\Packages\Quirky Series - Birds Bundle\_Scripts\Demo.cs" />
     <Compile Include="Assets\Crossy Road\Scripts\CameraFollow.cs" />
-    <Compile Include="Assets\LeanTween\Examples\Scripts\GeneralEventsListeners.cs" />
-    <Compile Include="Assets\LeanTween\Examples\Scripts\GeneralSimpleUI.cs" />
-    <Compile Include="Assets\LeanTween\Examples\Scripts\PathSpline2d.cs" />
-    <Compile Include="Assets\LeanTween\Framework\LTSeq.cs" />
-    <Compile Include="Assets\LeanTween\Examples\Scripts\PathBezier2d.cs" />
     <Compile Include="Assets\Crossy Road\Scripts\SpawnController.cs" />
-    <Compile Include="Assets\LeanTween\Examples\Scripts\PathSplineEndless.cs" />
-    <Compile Include="Assets\LeanTween\Examples\Scripts\Following.cs" />
-    <Compile Include="Assets\LeanTween\Examples\Scripts\PathSplinePerformance.cs" />
-    <Compile Include="Assets\LeanTween\Examples\Scripts\GeneralEasingTypes.cs" />
-    <Compile Include="Assets\LeanTween\Framework\LeanTween.cs" />
     <Compile Include="Assets\Crossy Road\Scripts\Coin.cs" />
-    <Compile Include="Assets\Quirky Series - Birds Bundle\_Scripts\Demo.cs" />
-    <Compile Include="Assets\LeanTween\Examples\Archived\TestingRigidbodyCS.cs" />
-    <Compile Include="Assets\LeanTween\Framework\LeanTweenExt.cs" />
-    <Compile Include="Assets\LeanTween\Examples\Scripts\GeneralBasics2d.cs" />
-    <Compile Include="Assets\LeanTween\Framework\LeanSmooth.cs" />
-    <Compile Include="Assets\LeanTween\Examples\Archived\TestingPunch.cs" />
-    <Compile Include="Assets\Crossy Road\Scripts\AnimatorController.cs" />
-    <Compile Include="Assets\LeanTween\Examples\Scripts\PathSplineTrack.cs" />
-    <Compile Include="Assets\LeanTween\Framework\LeanAudio.cs" />
-    <Compile Include="Assets\LeanTween\Examples\Archived\OldGUIExamplesCS.cs" />
-    <Compile Include="Assets\LeanTween\Framework\LTDescrOptional.cs" />
-    <Compile Include="Assets\LeanTween\Examples\Scripts\PathBezier.cs" />
-    <Compile Include="Assets\LeanTween\Examples\Scripts\PathSpline.cs" />
+    <Compile Include="Assets\Scripts\GroundsSpawner.cs" />
     <Compile Include="Assets\Crossy Road\Scripts\LevelGenerator.cs" />
-    <Compile Include="Assets\LeanTween\Examples\Scripts\GeneralUISpace.cs" />
-    <Compile Include="Assets\LeanTween\Examples\Scripts\TestingZLegacy.cs" />
-    <Compile Include="Assets\LeanTween\Examples\Scripts\GeneralBasic.cs" />
     <Compile Include="Assets\Scripts\BirdPlayer.cs" />
-    <Compile Include="Assets\LeanTween\Examples\Scripts\PathSplines.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Assets\LeanTween\ReadMe.txt" />
-    <None Include="Assets\Quirky Series - Birds Bundle\_Shader\SoftSurface.shader" />
-    <None Include="Assets\LeanTween\License.txt" />
-    <None Include="Assets\crossy-roads-master\ProjectSettings\ProjectVersion.txt" />
-    <None Include="Assets\LeanTween\Examples\Archived\2dUnlitWithFade.shader" />
-    <None Include="Assets\Quirky Series - Birds Bundle\_Shader\ToonRamp.shader" />
+    <None Include="Assets\Packages\Quirky Series - Birds Bundle\_Shader\SoftSurface.shader" />
+    <None Include="Assets\Packages\Quirky Series - Birds Bundle\_Shader\ToonRamp.shader" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

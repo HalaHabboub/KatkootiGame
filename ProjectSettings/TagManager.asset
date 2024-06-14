@@ -8,6 +8,11 @@ TagManager:
   - train
   - coin
   - river
+  - log
+  - car
+  - barrier
+  - safeGrass
+  - challengeOne
   layers:
   - Default
   - TransparentFX

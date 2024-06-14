@@ -6,15 +6,20 @@ using UnityEngine.SceneManagement;
 
 public class Manager : MonoBehaviour
 {
-    public int levelCount = 50;
+    public int levelCount = 40;
+    public int count = 0;
     public Text coin = null;
     public Text distance = null;
     public Camera cam = null;
     public GameObject guiGameOver = null;
-    public LevelGenerator levelGenerator = null;
+    private bool levelOne = false;
+
+    //public LevelGenerator levelGenerator = null;
+
+    public GroundsSpawner groundsSpawner = null;
 
     private int currentCoins = 0;
-    private int currentDistance = 0;
+    public int currentDistance = 0;
     private bool canPlay = false;
 
     private static Manager s_Instance;
@@ -33,10 +38,16 @@ public class Manager : MonoBehaviour
 
     private void Start()
     {
-        for (int i = 0; i < levelCount; i++)
-        {
-            levelGenerator.RandomGenerator();
-        }
+        // for (int i = 0; i < levelCount; i++)
+        // {
+        //     levelGenerator.RandomGenerator();
+        //     count++;
+        // }
+    }
+
+    void Update()
+    {
+
     }
 
     public void UpdateCoinCount(int value)
@@ -48,12 +59,28 @@ public class Manager : MonoBehaviour
 
     public void UpdateDistanceCount()
     {
+        if (currentDistance == 1 && !levelOne)
+        {
+            levelOne = true;
+            groundsSpawner.challengeGenerator();
+        }
         Debug.Log("Player moved forward for one point");
         currentDistance += 1;
         distance.text = currentDistance.ToString();
 
-        levelGenerator.RandomGenerator();
+        // if (currentDistance == 10)
+        // {
+        //     levelGenerator.challengeGenerator();
+        // }
+        // else
+        // {
+        //     levelGenerator.RandomGenerator();
+        //     count++;
+        // }
+        groundsSpawner.randomGenerator();
+
     }
+
 
     public bool CanPlay()
     {

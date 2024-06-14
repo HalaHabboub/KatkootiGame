@@ -16,15 +16,42 @@ public class BirdPlayer : MonoBehaviour
     private Animator anim;
     public ParticleSystem particle = null;
     public GameObject katkooti = null;
-    private ParticleSystem particleSystem;
+    private ParticleSystem ps;
+
+    private Rigidbody rb;
+
+    private bool canFly = false;
+
+    public GameObject guiChallengeOne = null;
+    int level = 1;
+
+    //For voice
+    public float sensitivity = 100f;
+    public float loudness;
+
+    AudioSource _audio;
+
 
     // Start is called before the first frame update
     void Start()
     {
+        rb = this.GetComponent<Rigidbody>();
         anim = katkooti.GetComponent<Animator>();
-        particleSystem = this.GetComponent<ParticleSystem>();
-        particleSystem.Pause();
+        ps = this.GetComponent<ParticleSystem>();
+        ps.Pause();
+
+
+        //for audio
+        _audio = GetComponent<AudioSource>();
+        _audio.clip = Microphone.Start(null, true, 10, 44100);
+        _audio.loop = true;
+        _audio.mute = true;
+
+
+        _audio.Play();
+
     }
+
 
     // Update is called once per frame
     void Update()
@@ -34,6 +61,18 @@ public class BirdPlayer : MonoBehaviour
         if (dead) return;
         CheckIfCanMove();
         Move();
+
+        if (canFly)
+        {
+            fly();
+        }
+        if (transform.position.y < -1)
+        {
+            Die();
+        }
+
+
+
     }
 
     void Move()
@@ -43,11 +82,12 @@ public class BirdPlayer : MonoBehaviour
             if (Input.GetKeyUp(KeyCode.UpArrow) && canMoveForward)
             {
                 transform.Translate(Vector3.forward * moveDistance);
-                SetMoveForwardState();
+                Manager.instance.UpdateDistanceCount();
             }
             else if (Input.GetKeyUp(KeyCode.DownArrow) && canMoveBackward)
             {
                 transform.Translate(Vector3.back * moveDistance);
+                Manager.instance.currentDistance--; //fixed the issue of counting wrong
             }
             else if (Input.GetKeyUp(KeyCode.LeftArrow) && canMoveLeft)
             {
@@ -60,17 +100,14 @@ public class BirdPlayer : MonoBehaviour
         }
     }
 
-    void SetMoveForwardState()
-    {
-        Manager.instance.UpdateDistanceCount();
-    }
+
 
     public void Die()
     {
         Manager.instance.GameOver();
         dead = true;
         anim.SetBool("dead", true);
-        particleSystem.Play();
+        ps.Play();
     }
 
     void CheckIfCanMove()
@@ -88,10 +125,78 @@ public class BirdPlayer : MonoBehaviour
 
     public void OnTriggerEnter(Collider collider)
     {
-        if (collider.CompareTag("river"))
+        if (collider.CompareTag("train") || collider.CompareTag("car"))
         {
             Die();
         }
+        if (collider.CompareTag("river"))
+        {
+            changeFly();
+            level++; //you pass a level with each river you cross
+        }
+        if (collider.CompareTag("safeGrass"))
+        {
+            guiChallengeOne.SetActive(true);
+            _audio.mute = false;
+        }
+
+    }
+    public void OnTriggerExit(Collider collider)
+    {
+        if (collider.CompareTag("river"))
+        {
+            canFly = false;
+            _audio.mute = true;
+        }
+        if (collider.CompareTag("safeGrass"))
+        {
+            guiChallengeOne.SetActive(false);
+
+        }
+
+    }
+
+    private void changeFly()
+    {
+        canFly = true;
+    }
+    public void fly()
+    {
+        // if (level == 2)
+        // {
+        //     transform.Translate(Vector3.forward * 0.05f);
+        //     if (Input.GetButtonDown("Jump"))
+        //     {
+        //         rb.AddForce(Vector3.up * 1.5f, ForceMode.Impulse);
+        //     }
+
+        // }
+        // if (level == 1)
+        // {
+        transform.Translate(Vector3.forward * 0.02f);
+
+        loudness = GetAverageVolume() * sensitivity;
+
+        if (loudness > 4)
+        {
+            rb.AddForce(Vector3.up * 0.3f, ForceMode.Impulse);
+        }
+        // }
+
+    }
+    float GetAverageVolume()
+    {
+
+        float[] data = new float[256];
+        float a = 0;
+        _audio.GetOutputData(data, 0);
+
+        foreach (float s in data)
+        {
+            a += Mathf.Abs(s);
+        }
+
+        return (a / 256f);
     }
 
 
