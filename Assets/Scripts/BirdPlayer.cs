@@ -14,9 +14,8 @@ public class BirdPlayer : MonoBehaviour
     private bool canMoveLeft = true;
     private bool canMoveRight = true;
     private Animator anim;
-    public ParticleSystem particle = null;
     public GameObject katkooti = null;
-    private ParticleSystem ps;
+    [SerializeField] ParticleSystem ps;
 
     private Rigidbody rb;
 
@@ -46,7 +45,6 @@ public class BirdPlayer : MonoBehaviour
     {
         rb = this.GetComponent<Rigidbody>();
         anim = katkooti.GetComponent<Animator>();
-        ps = this.GetComponent<ParticleSystem>();
         ps.Pause();
 
 

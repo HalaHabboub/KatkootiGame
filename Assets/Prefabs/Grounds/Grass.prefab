@@ -53,7 +53,7 @@ MonoBehaviour:
   minSpawnCount: 10
   maxSpawnCount: 20
   spawnableItems:
-  - {fileID: 104532, guid: e88d753d0943c0b49b581a77769253b7, type: 3}
+  - {fileID: 1000013574824664, guid: ddb84880fd43c81438a79b01b8a1a150, type: 3}
 --- !u!1 &124722
 GameObject:
   m_ObjectHideFlags: 0
@@ -251,7 +251,7 @@ MonoBehaviour:
   minSpawnCount: 10
   maxSpawnCount: 20
   spawnableItems:
-  - {fileID: 176378, guid: f770b16cc89e37e4386488baf04a1ca0, type: 3}
+  - {fileID: 1000013574824664, guid: ddb84880fd43c81438a79b01b8a1a150, type: 3}
 --- !u!1 &175062
 GameObject:
   m_ObjectHideFlags: 0
@@ -305,7 +305,7 @@ MonoBehaviour:
   minSpawnCount: 10
   maxSpawnCount: 20
   spawnableItems:
-  - {fileID: 104532, guid: e88d753d0943c0b49b581a77769253b7, type: 3}
+  - {fileID: 1000014210774634, guid: 943c8ff2287205b49a6c30a0bff8abda, type: 3}
 --- !u!1 &196276
 GameObject:
   m_ObjectHideFlags: 0
@@ -359,7 +359,7 @@ MonoBehaviour:
   minSpawnCount: 10
   maxSpawnCount: 20
   spawnableItems:
-  - {fileID: 176378, guid: f770b16cc89e37e4386488baf04a1ca0, type: 3}
+  - {fileID: 1000014210774634, guid: 943c8ff2287205b49a6c30a0bff8abda, type: 3}
 --- !u!1 &61921280286420364
 GameObject:
   m_ObjectHideFlags: 0

@@ -25,7 +25,7 @@ public class SpawnManager : MonoBehaviour
     {
         if (notCars)
         {
-            int totalSpawnCount = Random.Range(minSpawnCount, maxSpawnCount);
+            int totalSpawnCount = 10;//Random.Range(minSpawnCount, maxSpawnCount);
 
             for (int i = 0; i < totalSpawnCount; i++)
             {
