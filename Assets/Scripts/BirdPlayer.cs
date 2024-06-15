@@ -85,7 +85,7 @@ public class BirdPlayer : MonoBehaviour
         }
         if (Manager.instance.currentDistance > 55)
         {
-            level = 4;
+            level = 3;
         }
 
     }

@@ -557,7 +557,6 @@ MonoBehaviour:
   maxSpawnCount: 20
   spawnableItems:
   - {fileID: 176312, guid: cd7ccbdab9660cd4e8c053de8140459f, type: 3}
-  - {fileID: 151708, guid: b744b5c57a4c5c24b8c64a24a081fdf6, type: 3}
 --- !u!1 &143806
 GameObject:
   m_ObjectHideFlags: 0
