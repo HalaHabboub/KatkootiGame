@@ -19,15 +19,6 @@ Welcome to **Katkooti**! This game is inspired by the classic Crossy Road, but w
 - **Customizable Characters:** Allow players to personalize their bird character with different skins and accessories.
 - **Story Mode:** Develop a narrative-driven mode with specific objectives and a compelling storyline.
 
-## Installation
-
-1. Clone the repository:
-    ```
-    git clone https://github.com/HalaHabboub/KatkootiGame.git
-    ```
-2. Open the project in Unity.
-3. Build and run the game for your desired platform.
-
 ## How to Play
 
 - **Movement:** Use the arrow keys to move Katkooti.
